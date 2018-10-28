@@ -4,28 +4,27 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question6
     {
-    	/* when in doubt, roll your own priority queue */
-    	class PQ
+        /* when in doubt, roll your own priority queue */
+        struct State
         {
-            struct State
+            public int p, n;
+            public State(int _p, int _n)
             {
-                public int p, n;
-                public State(int _p, int _n)
-                {
-                    p = _p;
-                    n = _n;
-                }
+                p = _p;
+                n = _n;
             }
-
-            State[] s;
+        }
+        unsafe class PQ
+        {
+            readonly State* s;
             public int edx = 1;
-            int[] ixs;
+            readonly int* ixs;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public PQ(int sz)
+            public PQ(State* _s, int* _ixs)
             {
-                s = new State[sz + 5];
-                ixs = new int[sz + 5];
+                s = _s;
+                ixs = _ixs;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -106,11 +105,14 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             }
         }
 
-        public static int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
+        public static unsafe int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
-            PQ pq = new PQ(numOfServers);
-            bool[] v = new bool[numOfServers + 10];
-            int[] sp = new int[numOfServers + 10];
+            int sz = numOfServers + 10;
+            State* s = stackalloc State[sz];
+            int* ixs = stackalloc int[sz];
+            PQ pq = new PQ(s, ixs);
+            bool* v = stackalloc bool[sz];
+            int* sp = stackalloc int[sz];
             /* pre create state objects */
             for (int i = 0; i < numOfServers; i++)
             {
