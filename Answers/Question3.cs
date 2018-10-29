@@ -43,7 +43,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             /* tune the adjlist? maybe list access is slow */
             for (int i = 0; i <= numOfNodes; i++)
             {
-                ad[i] = new List<int>(numOfNodes);
+                ad[i] = new List<int>();
             }
             for (int i = 0; i < el; i++)
             {
