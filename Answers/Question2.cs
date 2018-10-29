@@ -13,7 +13,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             for (i = 0; i < cashflowOut.Length; i++) sm2 += cashflowOut[i];
 
             int lm = sm1 + sm2 + 10;
-            /* clamp to min(sumA, sumB) + 100 */
+            /* clamp to sumA+sumB - don't overallocate for coherence */
             if (sm1 < sm2)
             {
                 bool* co = stackalloc bool[lm], c = co + sm1 + 5;

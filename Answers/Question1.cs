@@ -5,7 +5,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         public static int Answer(int[] portfolios)
         {
-            /* use trie to go faster for n>16 */
+            /* use trie to go faster for n>16? */
             int a = 0;
             for(int i = 0; i < portfolios.Length; i++)
             {

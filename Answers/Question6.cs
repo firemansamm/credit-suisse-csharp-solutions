@@ -114,12 +114,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             PQ.Init(s, ixs);
             bool* v = stackalloc bool[sz];
             int* sp = stackalloc int[sz];
-            /* pre create state objects */
-            for (int i = 0; i < numOfServers; i++)
-            {
-                sp[i] = int.MaxValue;
-            }
-            sp[0] = 0;
+            for (int i = 0; i < numOfServers; i++) sp[i] = (i == 0) ? 0 : 1<<30;
             PQ.Push(0, 0);
             int cn, p;
             while (PQ.edx != 1)
