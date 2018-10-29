@@ -31,6 +31,10 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                             t++;
                         }
                         sm += (vs[j] = r);
+                        while (sm > ans) {
+                            sz--;
+                            sm -= vs[lx++];
+                        }
                         if (sz == vf)
                         {
                             if (sm < ans) ans = sm;
