@@ -15,7 +15,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             /* clamp to min(sumA, sumB) + 100 */
             if (sm1 < sm2)
             {
-                bool* co = stackalloc bool[sm1 + 110], c = co + sm1 + 5;
+                bool* co = stackalloc bool[sm1 + 1005], c = co + sm1 + 5;
                 for (i = 0; i < cashflowIn.Length; i++)
                 {
                     g = cashflowIn[i];
@@ -35,7 +35,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             }
             else
             {
-                bool* co = stackalloc bool[sm2 + 110], c = co + sm2 + 5;
+                bool* co = stackalloc bool[sm2 + 1005], c = co + sm2 + 5;
                 for (i = 0; i < cashflowOut.Length; i++)
                 {
                     g = cashflowOut[i];
