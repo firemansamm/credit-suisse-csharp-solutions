@@ -21,7 +21,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             static int* ixs;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Init(State* _s, int* _ixs)
+            public static void Init(State* _s, int* _ixs)
             {
                 s = _s;
                 ixs = _ixs;
