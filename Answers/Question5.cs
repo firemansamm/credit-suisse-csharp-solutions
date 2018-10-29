@@ -7,6 +7,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)
         {
             if (totalValueOfShares < 0) return 0;
+
+            /* clamp this to go faster, use recursion to clamp */
             fixed (int* shares = numOfShares)
             {
                 int nx, g, i, j, t, len = numOfShares.Length;

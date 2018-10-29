@@ -8,13 +8,14 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         public static unsafe int Answer(int[] cashflowIn, int[] cashflowOut)
         {
-            bool* co = stackalloc bool[200010], c = co + 100005;
             int sm1 = 0, sm2 = 0, g, i, j, f;
             for (i = 0; i < cashflowIn.Length; i++) sm1 += cashflowIn[i];
             for (i = 0; i < cashflowOut.Length; i++) sm2 += cashflowOut[i];
 
+            /* clamp to min(sumA, sumB) + 100 */
             if (sm1 < sm2)
             {
+                bool* co = stackalloc bool[sm1 + 110], c = co + sm1 + 5;
                 for (i = 0; i < cashflowIn.Length; i++)
                 {
                     g = cashflowIn[i];
@@ -34,6 +35,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             }
             else
             {
+                bool* co = stackalloc bool[sm2 + 110], c = co + sm2 + 5;
                 for (i = 0; i < cashflowOut.Length; i++)
                 {
                     g = cashflowOut[i];
