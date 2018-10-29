@@ -13,7 +13,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             {
                 int nx, g, i, j, t, len = numOfShares.Length;
                 int* ans = stackalloc int[totalValueOfShares + 5];
-                for (i = 0; i <= totalValueOfShares; i++) ans[i] = (i == 0) ? 0 : 1 << 30;
+                ans[0] = 0;
+                for (i = 1; i <= totalValueOfShares; i++) ans[i] = 1 << 30;
             
                 for (i = 0; i < len; i++)
                 {

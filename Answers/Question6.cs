@@ -114,7 +114,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             PQ.Init(s, ixs);
             bool* v = stackalloc bool[sz];
             int* sp = stackalloc int[sz];
-            for (int i = 0; i < numOfServers; i++) sp[i] = (i == 0) ? 0 : 1<<30;
+            sp[0] = 0;
+            for (int i = 1; i < numOfServers; i++) sp[i] = 1<<30;
             PQ.Push(0, 0);
             int cn, p;
             while (PQ.edx != 1)

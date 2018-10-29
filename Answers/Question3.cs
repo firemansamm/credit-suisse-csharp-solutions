@@ -41,6 +41,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             int* order = stackalloc int[vv], c = stackalloc int[vv], nc = stackalloc int[vv];
             int el = edgeLists.Length;
             /* tune the adjlist? maybe list access is slow */
+            /* for n <= 32, use a bitmask */
             for (int i = 0; i <= numOfNodes; i++)
             {
                 ad[i] = new List<int>();
