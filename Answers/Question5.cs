@@ -7,22 +7,21 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)
         {
             if (totalValueOfShares < 0) return 0;
-            int nx, g;
-            int* ans = stackalloc int[totalValueOfShares + 1];
-            int inf = (1 << 30) + 1, len = numOfShares.Length;
+            int nx, g, i, j, t, len = numOfShares.Length;
+            int* ans = stackalloc int[totalValueOfShares + 5];
             ans[0] = 0;
-            for (int i = 1; i <= totalValueOfShares; i++) ans[i] = 1 << 30;
+            for (i = 1; i <= totalValueOfShares; i++) ans[i] = 1 << 30;
         
-            for (int i = 0; i < len; i++)
+            for (i = 0; i < len; i++)
             {
                 g = numOfShares[i];
-                for (int j = g; j <= totalValueOfShares; j++)
+                for (j = g, t = 0; j <= totalValueOfShares; j++, t++)
                 {
-                    nx = ans[j - g] + 1;
-                    if (nx != inf && nx < ans[j]) ans[j] = nx;
+                    nx = ans[t] + 1;
+                    if (nx < ans[j]) ans[j] = nx;
                 }
             }
-            if (ans[totalValueOfShares] != 1 << 30) return ans[totalValueOfShares];
+            if (ans[totalValueOfShares] < 1 << 30) return ans[totalValueOfShares];
             return 0;
         }
     }
