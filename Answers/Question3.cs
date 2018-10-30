@@ -27,7 +27,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 order[o] = order[n] + 1;
                 ret += dfs2(o, v, ad, order, c, nc);
                 c[n] += nc[o];
-                nc[n] += Math.Max(nc[i], c[i]);
+                nc[n] += Math.Max(nc[o], c[o]);
             }
             c[n] += flag;
             return ret + 1;
