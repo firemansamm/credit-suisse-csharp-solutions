@@ -6,7 +6,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question3
     {
-        /* list adjlist */
+        /** list adjlist fallback for n > 31 **/
 
         static unsafe int dfs2(int n, bool* v, List<int>[] ad, int* order, int* c, int* nc)
         {
@@ -25,7 +25,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     continue;
                 }
                 order[o] = order[n] + 1;
-                ret += dfs(o, v, ad, order, c, nc);
+                ret += dfs2(o, v, ad, order, c, nc);
                 c[n] += nc[o];
                 nc[n] += Math.Max(nc[i], c[i]);
             }
@@ -63,6 +63,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             }
             return ans;
         }
+
+        /** end fallback for n>31 **/
 
 
         static unsafe int dfs(int n, bool* v, int* ad, int* order, int* c, int* nc, int tn)
