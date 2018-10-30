@@ -16,17 +16,15 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             for (int i = 1; i <= tn; i++)
             {
                 if ((adj & (1 << i)) == 0) continue;
-                o = cx[i];
-                if (v[o])
+                if (v[i])
                 {
-                    if (order[o] - order[n] % 2 == 0) flag = 0;
+                    if (order[i] - order[n] % 2 == 0) flag = 0;
                     continue;
                 }
-                order[o] = order[n] + 1;
-                ret += dfs(o, v, ad, order, c, nc, tn);
-                c[n] += nc[o];
-                if (c[o] > nc[o]) nc[n] += c[o];
-                else nc[n] += nc[o];
+                order[i] = order[n] + 1;
+                ret += dfs(i, v, ad, order, c, nc, tn);
+                c[n] += nc[i];
+                nc[n] += Math.Max(nc[i], c[i]);
             }
             c[n] += flag;
             return ret + 1;

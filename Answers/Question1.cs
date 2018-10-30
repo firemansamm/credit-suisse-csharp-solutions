@@ -12,8 +12,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 int v1 = portfolios[i];
                 for(int j = i + 1; j < portfolios.Length; j++)
                 {
-                    int v2 = v1 ^ portfolios[j];
-                    if (v2 > a) a = v2;
+                    a = Math.Max(a, v1 ^ portfolios[j]);
                 }
             }
             return a;
