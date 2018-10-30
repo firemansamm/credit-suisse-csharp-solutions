@@ -4,7 +4,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question5
     {
-        public static unsafe int Answer2(int[] numOfShares, int totalValueOfShares)
+        public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)
         {
             if (totalValueOfShares < 0) return 0;
             int nx, g, i, j, t, len = numOfShares.Length;
