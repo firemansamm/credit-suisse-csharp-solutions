@@ -4,30 +4,39 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question5
     {
-        public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)
-        {
-            if (totalValueOfShares < 0) return 0;
-
-            /* clamp this to go faster, use recursion to clamp */
-            fixed (int* shares = numOfShares)
+         /* how much faster is recursion */
+            public static unsafe int rec(int* coins, int idx, int val, int[] memo, int rs)
             {
-                int nx, g, i, j, t, len = numOfShares.Length;
-                int* ans = stackalloc int[totalValueOfShares + 5];
-                ans[0] = 0;
-                for (i = 1; i <= totalValueOfShares; i++) ans[i] = 1 << 30;
-            
-                for (i = 0; i < len; i++)
+                if (val < 0) return 1 << 30;
+                if (val == 0) return 0;
+                int ix = (idx * rs) + val;
+                if (memo[ix] != 0) return memo[ix];
+                int cc = coins[idx], ct = val / cc;
+                if (val % cc == 0) return ct;
+                if (idx == 0) return 1 << 30;
+                int ans = 1<<30, nv = coins[idx-1], rem;
+                if (nv == 0) return 1 << 30;
+                for (int i = ct; i >= 0; i--)
                 {
-                    g = shares[i];
-                    for (j = g, t = 0; j <= totalValueOfShares; j++, t++)
-                    {
-                        nx = ans[t] + 1;
-                        if (nx < ans[j]) ans[j] = nx;
-                    }
+                    rem = val - (i * cc);
+                    if (i + ((rem + nv - 1) / nv) >= ans) return memo[ix] = ans;
+                    ans = Math.Min(ans, i + rec(coins, idx - 1, rem, memo, rs));
                 }
-                if (ans[totalValueOfShares] < 1 << 30) return ans[totalValueOfShares];
-                return 0;
+                return memo[ix] = ans;
             }
-        }
+
+            public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)
+            {
+                if (totalValueOfShares < 0) return 0;
+                Array.Sort(numOfShares);
+                int len = numOfShares.Length;
+                int[] mem = new int[len * (totalValueOfShares + 1)];
+                fixed (int* shares = numOfShares)
+                {
+                    int ans = rec(shares, len - 1, totalValueOfShares, mem, totalValueOfShares);
+                    if (ans < 1 << 30) return ans;
+                    else return 0;
+                }
+            }
     }
 }
