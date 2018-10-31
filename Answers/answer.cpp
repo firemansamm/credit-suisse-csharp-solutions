@@ -3,8 +3,8 @@
 #include <cmath>
 using namespace std;
 
-/* compiled on windows 10 with: g++ -O2 -fPIC -frename-registers -shared -o answer.dll answer.cpp */
-/* compiled on ubntu 14.06 with g++ -O2 -fPIC -frename-registers -shared -o answer.so answer.cpp */
+/* compiled on windows 10 with: g++ -Ofast -fPIC -frename-registers -shared -o answer.dll answer.cpp */
+/* compiled on ubntu 14.06 with g++ -Ofast -fPIC -frename-registers -shared -o answer.so answer.cpp */
 
 extern "C" int ans1(int* ptr, int len) {
 	int ans = 0;
