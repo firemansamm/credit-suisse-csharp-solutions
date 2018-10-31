@@ -1,5 +1,5 @@
-﻿using Hippie.Unchecked;
-using System;
+﻿using System;
+using PriorityQueues;
 using System.Runtime.CompilerServices;
 
 namespace C_Sharp_Challenge_Skeleton.Answers
@@ -114,22 +114,17 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         public static unsafe int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
             int sz = numOfServers + 10;
-            var heap = HeapFactory.NewFibonacciHeap<State>();
-            /*State* s = stackalloc State[sz];
-            int* ixs = stackalloc int[sz];
-            PQ.Init(s, ixs);*/
-            bool* v = stackalloc bool[sz];
+            IPriorityQueue<int, int> pq = new FibonacciHeap<int, int>(PriorityQueueType.Minimum);
+            bool* v = stackalloc bool[sz], psh = stackalloc bool[sz];
             int* sp = stackalloc int[sz];
             sp[0] = 0;
             for (int i = 1; i < numOfServers; i++) sp[i] = 1<<30;
-            heap.Add(new State(0, 0));
+            pq.Enqueue(0, 0);
             int cn, p;
-            while (heap.Count > 0)
+            while (pq.Count > 0)
             {
-                State f = heap.RemoveMin();
-                cn = f.n;
-                p = f.p;
-                if (cn == targetServer) return p;
+                cn = pq.Dequeue();
+                if (cn == targetServer) return sp[cn];
                 if (v[cn]) continue;
                 v[cn] = true;
                 for (int i = 1; i < numOfServers; i++)
@@ -138,7 +133,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     int np = sp[cn] + connectionTimeMatrix[cn, i];
                     if (np < sp[i])
                     {
-                        heap.Add(new State(np, i));
+                        pq.Enqueue(i, np);
                         sp[i] = np;
                     }
                 }
