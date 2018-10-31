@@ -3,7 +3,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question1
     {
-        [System.Runtime.InteropServices.DllImport("answer", EntryPoint = "ans1")]
+        [System.Runtime.InteropServices.DllImport("Answers/answer", EntryPoint = "ans1")]
         public static extern int ans1(int[] ptr, int len);
         public static int Answer(int[] portfolios)
         {

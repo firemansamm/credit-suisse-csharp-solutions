@@ -5,7 +5,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     public class Question5
     {
 
-        [System.Runtime.InteropServices.DllImport("answer", EntryPoint = "ans5")]
+        [System.Runtime.InteropServices.DllImport("Answers/answer", EntryPoint = "ans5")]
         public static extern int ans5(int[] ptr, int val, int len);
 
         public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)

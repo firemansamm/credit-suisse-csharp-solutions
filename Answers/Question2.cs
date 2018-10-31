@@ -7,7 +7,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     public class Question2
     {
 
-        [System.Runtime.InteropServices.DllImport("answer", EntryPoint = "ans2")]
+        [System.Runtime.InteropServices.DllImport("Answers/answer", EntryPoint = "ans2")]
         public static extern int ans2(int[] ptr1, int[] ptr2, int l1, int l2);
 
         public static int Answer(int[] cashflowIn, int[] cashflowOut)
