@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <cstring>
 #include <cmath>
-#include <vector>
 using namespace std;
 
 /* compiled on windows 10 with: g++ -O3 -fPIC -shared -o answer.dll answer.cpp */

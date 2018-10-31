@@ -14,15 +14,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="answer.dll" />
-    <None Remove="answer.so" />
+    <None Remove="Answers\answer.dll" />
+    <None Remove="Answers\answer.so" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="answer.dll">
+    <Content Include="Answers\answer.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="answer.so">
+    <Content Include="Answers\answer.so">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

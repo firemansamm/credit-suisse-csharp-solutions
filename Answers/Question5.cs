@@ -10,6 +10,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
         public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)
         {
+            if (totalValueOfShares <= 0) return 0;
             return ans5(numOfShares, totalValueOfShares, numOfShares.Length);  
         }
 
