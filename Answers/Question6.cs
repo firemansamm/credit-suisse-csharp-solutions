@@ -18,7 +18,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
             public int CompareTo(State obj)
             {
-                return p.CompareTo(obj);
+                return p.CompareTo(obj.p);
             }
         }
         /*static unsafe class PQ
