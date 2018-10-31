@@ -1,13 +1,11 @@
-﻿using System;
-using PriorityQueues;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question6
     {
         /* when in doubt, roll your own priority queue */
-        class State : IComparable<State>
+        struct State
         {
             public int p, n;
             public State(int _p, int _n)
@@ -15,13 +13,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 p = _p;
                 n = _n;
             }
-
-            public int CompareTo(State obj)
-            {
-                return p.CompareTo(obj.p);
-            }
         }
-        /*static unsafe class PQ
+        static unsafe class PQ
         {
             static State* s;
             public static int edx;
@@ -42,6 +35,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 while (idx != 1)
                 {
                     if (s[idx].p > s[p].p) return;
+                    /* rotate up */
                     (s[idx], s[p]) = (s[p], s[idx]);
                     (ixs[s[idx].n], ixs[s[p].n]) = (idx, p);
                     idx = p;
@@ -55,6 +49,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 int nx = idx * 2;
                 while (nx < edx)
                 {
+                    /* rotate down */
                     if (edx != nx + 1 && s[nx + 1].p < s[nx].p) nx++;
                     if (s[nx].p > s[idx].p) return;
                     (s[nx], s[idx]) = (s[idx], s[nx]);
@@ -82,10 +77,12 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 s[idx].p = p;
                 if (cp > p)
                 {
+                    /* priority reduction, balance up */
                     r_up(idx);
                 }
                 else
                 {
+                    /* priority increase, balance down */
                     r_down(idx);
                 }
             }
@@ -107,24 +104,24 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             {
                 return (ixs[n] != 0);
             }
-        }*/
-
-        /* what about a fib heap */
+        }
 
         public static unsafe int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
             int sz = numOfServers + 10;
-            IPriorityQueue<int, int> pq = new FibonacciHeap<int, int>(PriorityQueueType.Minimum);
-            bool* v = stackalloc bool[sz], psh = stackalloc bool[sz];
+            State* s = stackalloc State[sz];
+            int* ixs = stackalloc int[sz];
+            PQ.Init(s, ixs);
+            bool* v = stackalloc bool[sz];
             int* sp = stackalloc int[sz];
             sp[0] = 0;
             for (int i = 1; i < numOfServers; i++) sp[i] = 1<<30;
-            pq.Enqueue(0, 0);
+            PQ.Push(0, 0);
             int cn, p;
-            while (pq.Count > 0)
+            while (PQ.edx != 1)
             {
-                cn = pq.Dequeue();
-                if (cn == targetServer) return sp[cn];
+                cn = PQ.Pop(out p);
+                if (cn == targetServer) return p;
                 if (v[cn]) continue;
                 v[cn] = true;
                 for (int i = 1; i < numOfServers; i++)
@@ -133,7 +130,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     int np = sp[cn] + connectionTimeMatrix[cn, i];
                     if (np < sp[i])
                     {
-                        pq.Enqueue(i, np);
+                        if (PQ.Contains(i)) PQ.Update(i, np);
+                        else PQ.Push(i, np);
                         sp[i] = np;
                     }
                 }
