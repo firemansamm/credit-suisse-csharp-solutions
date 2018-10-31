@@ -3,14 +3,15 @@
 #include <cmath>
 using namespace std;
 
-/* compiled on windows 10 with: g++ -O3 -fPIC -shared -o answer.dll answer.cpp */
-/* compiled on ubntu 14.06 with g++ -O3 -fPIC -shared -o answer.so answer.cpp */
+/* compiled on windows 10 with: g++ -Ofast -fPIC -frename-registers -shared -o answer.dll answer.cpp */
+/* compiled on ubntu 14.06 with g++ -Ofast -fPIC -frename-registers -shared -o answer.so answer.cpp */
 
 extern "C" int ans1(int* ptr, int len) {
 	int ans = 0;
 	for(int i=0;i<len;i++){
+		int f = ptr[i];
 		for(int j=0;j<len;j++){
-			ans = max(ans, ptr[i]^ptr[j]);
+			ans = max(ans, f^ptr[j]);
 		}
 	}
 	return ans;
@@ -70,4 +71,8 @@ extern "C" int ans5(int* ptr, int val, int len) {
 		}
 	}
 	return (ans[val] < 1<<30) ? ans[val] : 0;
+}
+
+extern "C" int ans6(int n, int t, int* f){
+	
 }
