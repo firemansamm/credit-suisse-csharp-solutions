@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-/* compiled on windows 10 with: g++ -O3 -shared -o answer.dll answer.cpp */
+/* compiled on windows 10 with: g++ -O3 -fPIC -shared -o answer.dll answer.cpp */
 /* compiled on ubntu 14.06 with g++ -O3 -fPIC -shared -o answer.so answer.cpp */
 
 extern "C" int ans1(int* ptr, int len) {
@@ -60,6 +60,7 @@ extern "C" int ans2(int* ptr1, int* ptr2, int len1, int len2) {
 }
 
 extern "C" int ans5(int* ptr, int val, int len) {
+	if (val <= 0) return 0;
 	int ans[val + 5];
 	for(int i=1;i<=val;i++) ans[i] = 1<<30;
 	ans[0] = 0;
