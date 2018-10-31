@@ -6,15 +6,24 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question2
     {
-        public static unsafe int Answer(int[] cashflowIn, int[] cashflowOut)
+
+        [System.Runtime.InteropServices.DllImport("answer", EntryPoint = "ans2")]
+        public static extern int ans2(int[] ptr1, int[] ptr2, int l1, int l2);
+
+        public static int Answer(int[] cashflowIn, int[] cashflowOut)
+        {
+            return ans2(cashflowIn, cashflowOut, cashflowIn.Length, cashflowOut.Length);
+        }
+
+        /*public static unsafe int Answer(int[] cashflowIn, int[] cashflowOut)
         {
             int sm1 = 0, sm2 = 0, g, i, j, f;
             for (i = 0; i < cashflowIn.Length; i++) sm1 += cashflowIn[i];
             for (i = 0; i < cashflowOut.Length; i++) sm2 += cashflowOut[i];
 
-            int lm = sm1 + sm2 + 10;
+            int lm = sm1 + sm2 + 10;*/
             /* clamp to sumA+sumB - don't overallocate for coherence */
-            if (sm1 < sm2)
+            /*if (sm1 < sm2)
             {
                 bool* co = stackalloc bool[lm], c = co + sm1 + 5;
                 for (i = 0; i < cashflowIn.Length; i++)
@@ -54,6 +63,6 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 for (i = 0; i <= sm2; i++) if (c[i] || c[-i]) return i;
                 return 0;
             }
-        }
+        }*/
     }
 }

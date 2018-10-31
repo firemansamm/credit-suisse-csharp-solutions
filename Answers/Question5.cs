@@ -4,7 +4,17 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question5
     {
+
+        [System.Runtime.InteropServices.DllImport("answer", EntryPoint = "ans5")]
+        public static extern int ans5(int[] ptr, int val, int len);
+
         public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)
+        {
+            return ans5(numOfShares, totalValueOfShares, numOfShares.Length);  
+        }
+
+
+        /*public static unsafe int Answer(int[] numOfShares, int totalValueOfShares)
         {
             if (totalValueOfShares < 0) return 0;
             int nx, i, j, t, len = numOfShares.Length;
@@ -22,6 +32,6 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             }
             if (ans[totalValueOfShares] < 1 << 30) return ans[totalValueOfShares];
             return 0;
-        }
+        }*/
     }
 }
